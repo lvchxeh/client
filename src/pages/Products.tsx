@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react"
-import { useSearchParams } from "react-router-dom"
+import { Link, useSearchParams } from "react-router-dom"
 import type { Product } from "../types"
 import { dummyProducts, categoriesData } from "../assets/assets"
 import { ChevronDown, Home, SlidersHorizontal } from "lucide-react"
-import { Link } from "react-router-dom"
 import ProductCard from "../components/ProductCard"
 import Loading from "../components/Loading"
+import FilterPanel from "../components/FilterPanel"
 
 
 const Products = () => {
@@ -66,7 +66,9 @@ const Products = () => {
           {/* Siderbar - Desktop */}
           <aside className="hidden lg:block w-64 shrink-0">
             <div className="bg-white rounded-2xl p-4 sticky top-24">
-              <p>Filter</p>
+
+              <FilterPanel categories={categoriesData} category={category} organic={organic} minPrice={minPrice} maxPrice={maxPrice} updateFilter={updateFilter} clearFilters={clearFilters} hasFilters={hasFilters} />
+
             </div>
           </aside>
 
