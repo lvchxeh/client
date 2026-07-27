@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import type { Product } from "../types"
 import { dummyProducts } from "../assets/assets"
 import Loading from "../components/Loading"
-import { HomeIcon } from "lucide-react"
+import { ArrowLeftIcon, HomeIcon } from "lucide-react"
 
 const ProductPage = () => {
 
@@ -57,6 +57,11 @@ const ProductPage = () => {
           <span>/</span>
           <span className="text-app-green font-medium truncate mx-w-[200px]">{product.name}</span>
         </nav>
+
+        {/* Back button */}
+        <button onClick={() => navigate(-1)} className="mb-6 flex items-center gap-1.5 text-sm text-app-text-light hover:text-app-green transition-colors">
+          <ArrowLeftIcon className="size-4" /> Back
+        </button>
       </div>
     </div>
   )
