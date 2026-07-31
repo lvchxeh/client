@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react"
 import type { Order } from "../types"
-import { useSearchParams } from "react-router-dom"
+import { Link, useSearchParams } from "react-router-dom"
 import { useCart } from "../context/CartContext"
 import { dummyDashboardOrdersData } from "../assets/assets"
+import Loading from "../components/Loading"
+import { CalendarIcon, PackageIcon } from "lucide-react"
 
 const MyOrders = () => {
 
@@ -50,6 +52,44 @@ const MyOrders = () => {
         </div>
 
         {/* Orders List */}
+      {loading ? (
+        <Loading />
+      ) : orders.length === 0 ? (
+        <div className="text-center py-16">
+          <PackageIcon className="size-17 text-app-border mx-auto mb-4" />
+          <h2 className="text-lg font-medium text-app-green mb-2">No orders yet</h2>
+          <p className="text-sm text-app-text-light mb-4">Start shopping to see your orders here</p>
+          <Link to="/products" className="inline-flex px-4 py-2 bg-app-green text-white text-sm rounded-lg">
+            Start Shopping!
+          </Link>
+        </div>
+      ) : (
+        <div className="space-y-4">
+          {orders.map((order) => (
+            <Link key={order._id} to={`/orders/${order._id}`} 
+            className="block max-w-4xl bg-white rounded-2xl p-5 hover:shadow transition-all">
+              {/* order id, date & status */}
+              <div className="flex items-start justify-between mb-3">
+                {/* left */}
+                <div>
+                  <p className="text-sm font-medium text-app-green">Order#{order._id.slice(-8).toUpperCase()}</p>
+                  <div className="flex items-center gap-2 mt-1">
+                    <CalendarIcon className="size-3 text-app-text-light" />
+                    <span className="text-xs text-app-text-light">{new Date(order.createdAt).toLocaleDateString("en-US", {month: "short", day: "numeric", year: "numeric"})}</span>
+                  </div>
+                </div>
+
+                {/* right */}
+                <div></div>
+              </div>
+
+              {/* Item thumbnails */}
+
+              {/* total items & price */}
+            </Link>
+          ))}
+        </div>
+      )}
       </div>
       
     </div>
