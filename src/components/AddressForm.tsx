@@ -46,17 +46,18 @@ const AddressForm = ({resetForm, handleSubmit, form, setForm, editingId} : any) 
                         </div>
                         <div className="flex items-end pb-1">
                             <label className="flex items-center gap-2 cursor-pointer">
-                                <input type="checkbox" checked={form.isDeafult} onChange={(e) => setForm({...form, isDefault: e.target.value})} />
+                                <input type="checkbox" checked={form.isDefault} onChange={(e) => setForm({...form, isDefault: e.target.checked})} />
                                 <span className="text-sm text-app-text">Set as default</span>
                             </label>
-                        </div>
-                    </div>
 
+                        </div>
+
+                    </div>
                 </div>
 
                 {/* submit button */}
-                <button type="submit">
-
+                <button type="submit" className="mt-6 w-full py-3 bg-app-green text-white font-semibold rounded-xl hover:bg-app-green-light transition-colors" >
+                    {editingId ? "Update Address" : "Save Address"}
                 </button>
 
             </form>
